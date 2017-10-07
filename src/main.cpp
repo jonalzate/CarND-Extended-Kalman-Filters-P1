@@ -147,14 +147,10 @@ int main()
     	  estimations.push_back(estimate);
 
     	  VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-    	  //cout << "calculated RMSE x = " << RMSE(0) << " y = " << RMSE(1) << " vx = " << RMSE(2) << " vy = " << RMSE(3) << endl;
-          //cout << "Estimated x = " << estimate(0) << " y = " << estimate(1) << " vx = " << estimate(2) << " vy = " << estimate(3) << endl;
-          //cout << "Ground Truth x = " << gt_values(0) << " y = " << gt_values(1) << " vx = " << gt_values(2) << " vy = " << gt_values(3) << endl;
-          
+    	  
           size_t N = measurements_list.size();
           for (size_t k = 0; k < N; ++k) 
           {
-          	cout << "inside for loop, measurement list size = " << N << endl;
           	// start filtering from the second frame (the speed is unknown in the first
           	// frame)
           	fusionEKF.ProcessMeasurement(measurements_list[k]);
@@ -164,21 +160,20 @@ int main()
           	out_file_ << fusionEKF.ekf_.x_(1) << "\t";
           	out_file_ << fusionEKF.ekf_.x_(2) << "\t";
           	out_file_ << fusionEKF.ekf_.x_(3) << "\t";
-          	cout << "added estimated px, py, vx, vy to output file" << endl;
-
+          	
           	// output the measurements
           	if (measurements_list[k].sensor_type_ == MeasurementPackage::LASER) {
                	// output the estimation
                	out_file_ << measurements_list[k].raw_measurements_(0) << "\t";
                	out_file_ << measurements_list[k].raw_measurements_(1) << "\t";
-               	cout << "added lidar raw measurements to output file" << endl;
+               	
           	} else if (measurements_list[k].sensor_type_ == MeasurementPackage::RADAR) {
                	// output the estimation in the cartesian coordinates
                	float ro = measurements_list[k].raw_measurements_(0);
                	float phi = measurements_list[k].raw_measurements_(1);
                	out_file_ << ro * cos(phi) << "\t"; // p1_meas
                	out_file_ << ro * sin(phi) << "\t"; // ps_meas
-               	cout << "added radar raw measurements to output file" << endl;
+               	
           	}
 
           	// output the ground truth packages
@@ -186,8 +181,7 @@ int main()
           	out_file_ << gt_values(1) << "\t";
           	out_file_ << gt_values(2) << "\t";
           	out_file_ << gt_values(3) << "\n";
-          	cout << "added groundthruth px, py, vx, vy to output file" << endl;
-
+          	
           }
           
           json msgJson;

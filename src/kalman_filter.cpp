@@ -7,6 +7,7 @@ using namespace std;
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
+
 KalmanFilter::KalmanFilter() {}
 
 KalmanFilter::~KalmanFilter() {}
@@ -55,6 +56,8 @@ void KalmanFilter::Update(const VectorXd &z) {
     
 }
 
+
+
 void KalmanFilter::UpdateEKF(const VectorXd &z) 
 {
   /**
@@ -81,6 +84,13 @@ void KalmanFilter::UpdateEKF(const VectorXd &z)
   z_pred << rho, phi, rho_dot;
   
   VectorXd y = z - z_pred;
+  while ( y(1) > M_PI || y(1) < -M_PI ) {
+    if ( y(1) > M_PI ) {
+      y(1) -= M_PI;
+    } else {
+      y(1) += M_PI;
+    }
+  }
   
   MatrixXd Ht = H_.transpose();
   MatrixXd S = H_ * P_ * Ht + R_;
@@ -92,6 +102,5 @@ void KalmanFilter::UpdateEKF(const VectorXd &z)
   int x_size = x_.size();
   MatrixXd I = MatrixXd::Identity(x_size, x_size);
   P_ = (I - K * H_) * P_;
-  
-  
 }
+

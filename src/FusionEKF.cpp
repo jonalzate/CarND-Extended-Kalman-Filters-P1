@@ -20,7 +20,7 @@ FusionEKF::FusionEKF() {
   previous_timestamp_ = 0;
   
   //create a 4D state vector, we don't know yet the values of the x state
-  ekf_.x_ = VectorXd(4);
+  
   
   // Create the covariance matrix P 
   ekf_.P_ = MatrixXd(4, 4);
@@ -61,8 +61,8 @@ FusionEKF::FusionEKF() {
 			  0, 0, 0, 1;
   
   //set the acceleration noise components
-  noise_ax = 9.0;
-  noise_ay = 9.0;
+  noise_ax = 9;
+  noise_ay = 9;
 	
 }
 
@@ -88,7 +88,8 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
     
     // Initialize the state ekf.x_ with the first measurement
     //cout << "EKF: " << endl;
-    //ekf_.x_ = VectorXd(4);
+    ekf_.x_ = VectorXd(4);
+    ekf_.x_ << 1, 1, 1, 1;
 
     if (measurement_pack.sensor_type_ == MeasurementPackage::RADAR) 
     {
@@ -101,13 +102,13 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
       
       float px = rho * cos(phi);
       float py = rho * sin(phi);
-      float vx = rho_dot * cos(phi);
-      float vy = rho_dot * sin(phi);
+      //float vx = rho_dot * cos(phi);
+      //float vy = rho_dot * sin(phi);
       
       ekf_.x_[0] = px; 
       ekf_.x_[1] = py; 
-      ekf_.x_[2] = vx; 
-      ekf_.x_[3] = vy;
+      ekf_.x_[2] = 0; 
+      ekf_.x_[3] = 0;
         
     }
     else if (measurement_pack.sensor_type_ == MeasurementPackage::LASER) 
