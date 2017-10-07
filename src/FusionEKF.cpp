@@ -101,9 +101,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
       
       float px = rho * cos(phi);
       float py = rho * sin(phi);
-      //float vx = rho_dot * cos(phi);
-      //float vy = rho_dot * sin(phi);
-      
+      // Assume velocity is equal to zero
       ekf_.x_[0] = px; 
       ekf_.x_[1] = py; 
       ekf_.x_[2] = 0; 

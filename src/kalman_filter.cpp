@@ -84,6 +84,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z)
   z_pred << rho, phi, rho_dot;
   
   VectorXd y = z - z_pred;
+  // normalize angle phi to be between -pi and pi
   while ( y(1) > M_PI || y(1) < -M_PI ) {
     if ( y(1) > M_PI ) {
       y(1) -= M_PI;
