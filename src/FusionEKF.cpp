@@ -4,7 +4,6 @@
 #include <iostream>
 #include <math.h>
 
-#define EPS 0.0001 // A very small number
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -61,8 +60,8 @@ FusionEKF::FusionEKF() {
 			  0, 0, 0, 1;
   
   //set the acceleration noise components
-  noise_ax = 9;
-  noise_ay = 9;
+  noise_ax = 9.0;
+  noise_ay = 9.0;
 	
 }
 
@@ -122,13 +121,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack)
       ekf_.x_[2] = 0;
       ekf_.x_[3] = 0;
     }
-    
-    // Deal with the special case initialisation problems
-    //if (fabs(ekf_.x_[0]) < EPS and fabs(ekf_.x_[1]) < EPS)
-    //{
-	//	ekf_.x_[0] = EPS;
-	//	ekf_.x_[1] = EPS;
-	//}
     
     // Save the initiall timestamp for dt calculation
     previous_timestamp_ = measurement_pack.timestamp_;
