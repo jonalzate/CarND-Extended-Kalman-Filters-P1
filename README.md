@@ -63,7 +63,9 @@ No additional data was generated for this project
 * Accuracy
 	* px, py, vx, vy output coordinates have an RMSE around [.11, .11, 0.52, 0.52] 
 
+## Visualization
 
+![output](./output.png "output")
 
 
 
