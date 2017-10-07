@@ -65,7 +65,7 @@ No additional data was generated for this project
 
 ## Visualization
 
-![output](./output.png "output")
+![vis_output](./vis_output.png "vis_output")
 
 
 
