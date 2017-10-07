@@ -1,4 +1,4 @@
-# Install script for directory: /Users/Jonas/Documents/udacityCourses/selfDrivingCarNanoDegree/term2/projects/CarND-Extended-Kalman-Filter
+# Install script for directory: /Users/Jonas/Documents/udacityCourses/selfDrivingCarNanoDegree/term2/projects/CarND-Extended-Kalman-Filter-P1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/Jonas/Documents/udacityCourses/selfDrivingCarNanoDegree/term2/projects/CarND-Extended-Kalman-Filter/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/Jonas/Documents/udacityCourses/selfDrivingCarNanoDegree/term2/projects/CarND-Extended-Kalman-Filter-P1/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
